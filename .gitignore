@@ -16,6 +16,11 @@ dist-ssr
 .aoiwdoaid
 .dor
 # Editor directories and files
+
+
+
+
+
 .vscode/*
 !.vscode/extensions.json
 .idea
