@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // Targetkan versi ECMAScript yang lebih modern
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // Library yang tersedia (DOM untuk React)
+    "module": "ESNext", // Gunakan modul ESNext
+    "skipLibCheck": true, // Lewati pemeriksaan tipe untuk file di node_modules
+
+    /* Bundler mode */
+    "moduleResolution": "bundler", // Penting untuk Vite
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx", // Mendukung sintaks JSX untuk React
+
+    /* Linting */
+    "strict": true, // Aktifkan semua pemeriksaan tipe strict
+    "noUnusedLocals": true, // Peringatan untuk variabel lokal yang tidak terpakai
+    "noUnusedParameters": true, // Peringatan untuk parameter yang tidak terpakai
+    "noFallthroughCasesInSwitch": true, // Peringatan untuk case switch yang tidak memiliki break
+
+    /* Path Aliases (Opsional, tapi direkomendasikan jika ingin pakai) */
+    // "baseUrl": ".", // Jika ingin menggunakan path alias seperti "@components"
+    // "paths": {
+    //   "@components/*": ["./src/components/*"],
+    //   "@utils/*": ["./src/utils/*"]
+    // }
+  },
+  "include": ["src"], // Sertakan semua file di folder 'src'
+  "references": [{ "path": "./tsconfig.node.json" }] // Ini penting untuk setup Vite
+}

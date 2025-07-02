@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "jsx": "react-jsx", // Tambahkan ini jika kamu punya kode JSX di bagian Node (misal, SSR)
+    "types": ["node"] // Penting untuk definisi tipe Node.js
+  },
+  "include": ["./vite.config.ts"] // Sertakan file konfigurasi Vite kamu
+}
