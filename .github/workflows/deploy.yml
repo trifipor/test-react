@@ -3,7 +3,7 @@ name: Deploy to VPS via SSH
 on:
   push:
     branches:
-      - master  # Ganti ke "main" jika pakai branch main
+      - master  # Ganti jika branch kamu berbeda
 
 jobs:
   deploy:
@@ -16,20 +16,18 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          printf "%s" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa_github
+          printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa_github
           chmod 600 ~/.ssh/id_rsa_github
-          ssh-keyscan -H 103.235.75.42 >> ~/.ssh/known_hosts
+          ssh-keyscan -p 2354 -H 103.235.75.42 >> ~/.ssh/known_hosts
 
-      - name: Debug SSH folder
+      - name: Debug SSH folder (optional)
         run: |
           ls -lah ~/.ssh
           head -n 5 ~/.ssh/id_rsa_github
 
       - name: Deploy to VPS
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_auth.sock
         run: |
-          ssh -i ~/.ssh/id_rsa_github -o StrictHostKeyChecking=no trifipor@103.235.75.42 << 'EOF'
+          ssh -i ~/.ssh/id_rsa_github -o StrictHostKeyChecking=no trifipor@103.235.75.42 -p 2354 << 'EOF'
             cd /home/trifipor/cicd/test-react
             git pull origin master
             docker compose build
