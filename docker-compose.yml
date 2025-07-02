@@ -1,10 +1,9 @@
-version: '3'
 services:
   app:
     build: .
     container_name: test-react
     ports:
-      - "3020:3020"
+      - "127.0.0.1:5566:5566"
     env_file:
       - .env
     restart: always
