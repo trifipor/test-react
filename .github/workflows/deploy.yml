@@ -1,0 +1,30 @@
+name: Deploy to VPS via SSH
+
+on:
+  push:
+    branches:
+      - main  # sesuaikan dengan branch kamu
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 103.235.75.42 >> ~/.ssh/known_hosts
+
+      - name: Deploy to VPS
+        run: |
+          ssh -i ~/.ssh/id_rsa trifipor@103.235.75.42 << 'EOF'
+            cd /home/trifipor/cicd/test-react
+            git pull
+            docker compose build
+            docker compose up -d
+          EOF
